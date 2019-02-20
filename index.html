@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Documentation</title>
+    <title>IBS KYC API</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -198,10 +198,10 @@
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all_nosearch.js"></script>
+      <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[]">
+  <body class="index" data-languages="[&quot;php&quot;,&quot;shell&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,6 +210,15 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="php">php</a>
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
@@ -218,7 +227,7 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
+            <a href="#users" class="toc-h1 toc-link" data-title="Users">Users</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-all-users" class="toc-h2 toc-link" data-title="Get All Users">Get All Users</a>
@@ -227,7 +236,7 @@
                     <a href="#get-user-by-token" class="toc-h2 toc-link" data-title="Get User by token">Get User by token</a>
                   </li>
                   <li>
-                    <a href="#create-user-account-get-token-for-query" class="toc-h2 toc-link" data-title="Create user account (get token for query)">Create user account (get token for query)</a>
+                    <a href="#create-user-request-token" class="toc-h2 toc-link" data-title="Create User (request token)">Create User (request token)</a>
                   </li>
               </ul>
           </li>
@@ -238,34 +247,32 @@
                     <a href="#get-all-forms" class="toc-h2 toc-link" data-title="Get All Forms">Get All Forms</a>
                   </li>
                   <li>
-                    <a href="#get-user-by-token-2" class="toc-h2 toc-link" data-title="Get User by token">Get User by token</a>
+                    <a href="#get-form-by-token" class="toc-h2 toc-link" data-title="Get Form by token">Get Form by token</a>
                   </li>
                   <li>
-                    <a href="#create-user-account-get-token-for-query-2" class="toc-h2 toc-link" data-title="Create user account (get token for query)">Create user account (get token for query)</a>
+                    <a href="#get-form-query-status-by-token" class="toc-h2 toc-link" data-title="Get Form Query Status by token">Get Form Query Status by token</a>
+                  </li>
+                  <li>
+                    <a href="#get-form-iban-by-token" class="toc-h2 toc-link" data-title="Get Form IBAN by token">Get Form IBAN by token</a>
+                  </li>
+                  <li>
+                    <a href="#create-form" class="toc-h2 toc-link" data-title="Create Form">Create Form</a>
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
       </ul>
+        <ul class="toc-footer">
+            <li><a href='mailto:support@ibsettle.com'>Contact support</a></li>
+            <li>All rights reserved © 2019 IBS Lithuania</li>
+        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <hr>
-
-<p>title: IBS KYC API</p>
-
-<p>language_tabs: # must be one of https://git.io/vQNgJ
-  - php
-  - shell
-  - javascript</p>
-
-<p>toc_footers:
-  - <a href='mailto:support@ibsettle.com'>Contact support</a>
-  - All rights reserved © 2019 IBS Lithuania</p>
-
-<p>includes:
-  - errors</p>
-<h2 id='search-true'>search: true</h2><h1 id='introduction'>Introduction</h1>
+        <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the IBS KYC API! You can use our API to access IBS Simplified Forms API endpoints, which can get information on user account details and forms queries in our database.</p>
 
 <p>We have language bindings in PHP, Shell and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
@@ -275,37 +282,36 @@
 </blockquote>
 <pre class="highlight php tab-php"><code>$curl = curl_init("api_endpoint_here");
 
-curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+curl_setopt(
+  $curl, 
+  CURLOPT_HTTPHEADER, 
+  array(
+    "Content-Type: application/json" , 
+    "Authorization: Bearer authenticationToken"))
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: Basic username:password"</span>
+  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'username:password'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>authToken</code> with your API key.</p>
+<p>Make sure to replace <code>authenticationToken</code> with your API key.</p>
 </blockquote>
 
-<p>OAuth uses API keys to allow access to the API. You can register a new authToken API key at our <a href="https://ibsettle.com/kyc/developers">developer portal</a>.</p>
+<p>Bearer Authentication key allow access to the API. You can get authentication token by contacting our <a href="mailto:support@ibsettle.com">support</a>.</p>
 
-<p>OAuth expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>Authentication token must be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code>Authorization: bearer &#39;authToken&#39;</code></p>
+<p><code>Authorization: Bearer authenticationToken</code></p>
 
 <aside class="notice">
-You must replace <code>authToken</code> with your personal API key.
+You must replace <code>authenticationToken</code> with your personal API key.
 </aside>
-<h1 id='accounts'>Accounts</h1><h2 id='get-all-users'>Get All Users</h2><pre class="highlight php tab-php"><code>require 'users'
-
-api = Users::APIClient.authorize!('users')
-api.users.get
+<h1 id='users'>Users</h1><h2 id='get-all-users'>Get All Users</h2><pre class="highlight php tab-php"><code>php
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/all"</span>
-  -H <span class="s2">"Authorization: bearer 'authToken'"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">users</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -313,35 +319,29 @@ api.users.get
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0291f97f835756e953b98eccbb55dca9"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example1@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 16:00:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 17:00:00"</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a541227f835746e953b22efctb25dce2"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 16:00:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 17:00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all users.</p>
+<p>This endpoint retrieves all users list.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://ibsettle.com/kyc/api/users/get/all</code></p>
 
 <aside class="success">
-Remember — a happy user is an authenticated user!
+Remember — to authenticate with every request!
 </aside>
-<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight php tab-php"><code>require 'users'
-
-api = Users::APIClient.authorize!('users')
-api.users.get("a541227f835746e953b22efctb25dce2")
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/byToken/a541227f835746e953b22efctb25dce2"</span>
-  -H <span class="s2">"Authorization: bearer 'authToken'"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">users</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"a541227f835746e953b22efctb25dce2"</span><span class="p">);</span>
+<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight php tab-php"><code>php
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;"</span>
+  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -349,16 +349,16 @@ api.users.get("a541227f835746e953b22efctb25dce2")
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a541227f835746e953b22efctb25dce2"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example1@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 16:00:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 17:00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific user.</p>
+<p>This endpoint retrieves a specific user by token.</p>
 
-<aside class="warning">Test warning</aside>
+<aside class="warning">Token generation is on User create</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>https://ibsettle.com/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
+<p><code>https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -368,22 +368,21 @@ api.users.get("a541227f835746e953b22efctb25dce2")
 </thead><tbody>
 <tr>
 <td>token</td>
-<td>The token of the specific user to get</td>
+<td>The token of the specific User to get</td>
 </tr>
 </tbody></table>
-<h2 id='create-user-account-get-token-for-query'>Create user account (get token for query)</h2><pre class="highlight php tab-php"><code>php
+<h2 id='create-user-request-token'>Create User (request token)</h2><pre class="highlight php tab-php"><code>php
 </code></pre><pre class="highlight shell tab-shell"><code>shell
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command POST in JSON structure like this to get success message and generated token:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":(..."</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example3@example.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint creates user account.</p>
+<p>This endpoint creates user and generates token.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://ibsettle.com/kyc/api/users/create</code></p>
 <h3 id='required-post-parameters'>Required POST Parameters</h3>
@@ -394,8 +393,266 @@ api.users.get("a541227f835746e953b22efctb25dce2")
 </tr>
 </thead><tbody>
 <tr>
+<td>email</td>
+<td>The email of the user</td>
+</tr>
+</tbody></table>
+<h3 id='parameters-on-result'>Parameters on result</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>message</td>
+<td>Success and Error messages</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Token will be shown only on success message with user creation</td>
+</tr>
+</tbody></table>
+<h1 id='forms'>Forms</h1><h2 id='get-all-forms'>Get All Forms</h2><pre class="highlight php tab-php"><code>php
+</code></pre><pre class="highlight shell tab-shell"><code>shell
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0291f97f835756e953b98eccbb55dca9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example1@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39001010001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yes/No (optional:default is No)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"additionalDetailsPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceOfFunds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54366hd7f835756e934498eccbb55da9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39001010001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yes/No (optional:default is No)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"additionalDetailsPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceOfFunds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all forms.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://ibsettle.com/kyc/api/forms/get/all</code></p>
+
+<aside class="success">
+Remember — to authenticate with every request!
+</aside>
+<h2 id='get-form-by-token'>Get Form by token</h2><pre class="highlight php tab-php"><code>php
+</code></pre><pre class="highlight shell tab-shell"><code>shell
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54366hd7f835756e934498eccbb55da9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39001010001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yes/No (optional:default is No)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"additionalDetailsPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceOfFunds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific user.</p>
+
+<aside class="warning">You will get token after User creation</aside>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>The token of the specific user to get form</td>
+</tr>
+</tbody></table>
+<h2 id='get-form-query-status-by-token'>Get Form Query Status by token</h2><pre class="highlight php tab-php"><code>php
+</code></pre><pre class="highlight shell tab-shell"><code>shell
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"queryStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Query Status"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves exact form by token and show query status.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET https://ibsettle.com/kyc/api/forms/get/queryStatus?token=&lt;token&gt;</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>The token of the specific user to get form</td>
+</tr>
+</tbody></table>
+<h3 id='query-statuses'>Query Statuses</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>queryStatus</td>
+<td>&quot;Submitted&quot;, &quot;Reviewing&quot;, &quot;Rejected&quot;, &quot;On Boarded&quot;</td>
+</tr>
+</tbody></table>
+<h2 id='get-form-iban-by-token'>Get Form IBAN by token</h2><pre class="highlight php tab-php"><code>php
+</code></pre><pre class="highlight shell tab-shell"><code>shell
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"iban"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IBAN number"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves exact form by token and show iban number.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET https://ibsettle.com/kyc/api/forms/get/iban?token=&lt;token&gt;</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>The token of the specific user to get form</td>
+</tr>
+</tbody></table>
+<h2 id='create-form'>Create Form</h2><pre class="highlight php tab-php"><code>php
+</code></pre><pre class="highlight shell tab-shell"><code>shell
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+</code></pre>
+<blockquote>
+<p>[required] The above command POST in JSON structure like this to get success message on form creation:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>[full] The above command POST in JSON structure like this to get success message on form creation:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39001010001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"personPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yes/No (optional:default is No)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"additionalDetailsPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceOfFunds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint creates form query for user.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST https://ibsettle.com/kyc/api/forms/create</code></p>
+<h3 id='required-post-parameters-2'>Required POST Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Requirements</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>Token for user detect</td>
+<td>hash token code which you get after User creation</td>
+</tr>
+<tr>
 <td>name</td>
-<td>The name of the user</td>
+<td>User Name and Surname</td>
+<td>minlength =&gt; 1, maxlength =&gt; 150</td>
+</tr>
+<tr>
+<td>email</td>
+<td>User Email Address</td>
+<td>E-mail validation</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>User Phone Number</td>
+<td>Phone validation</td>
+</tr>
+<tr>
+<td>residenceAddress</td>
+<td>User Residence Address</td>
+<td>maxlength =&gt; 150</td>
 </tr>
 </tbody></table>
 <h3 id='optional-post-parameters'>Optional POST Parameters</h3>
@@ -406,127 +663,88 @@ api.users.get("a541227f835746e953b22efctb25dce2")
 </tr>
 </thead><tbody>
 <tr>
+<td>personCode</td>
+<td>User person code</td>
+</tr>
+<tr>
+<td>personPE</td>
+<td>User Politicaly Exposed (Yes / No)</td>
+</tr>
+<tr>
+<td>additionalDetailsPE</td>
+<td>If User Politicaly Exposed (Yes) then fill additional details</td>
+</tr>
+<tr>
 <td>sourceOfFunds</td>
 <td>User source of funds</td>
 </tr>
 </tbody></table>
-<h1 id='forms'>Forms</h1><h2 id='get-all-forms'>Get All Forms</h2><pre class="highlight php tab-php"><code>require 'users'
-
-api = Users::APIClient.authorize!('users')
-api.users.get
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/all"</span>
-  -H <span class="s2">"Authorization: bearer 'authToken'"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">users</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0291f97f835756e953b98eccbb55dca9"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 16:00:00"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 17:00:00"</span><span class="w">
-</span><span class="p">},</span><span class="w">
-</span><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a541227f835746e953b22efctb25dce2"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 16:00:00"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 17:00:00"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all users.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api/users/get/all</code></p>
-
-<aside class="success">
-Remember — a happy user is an authenticated user!
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
-<h2 id='get-user-by-token-2'>Get User by token</h2><pre class="highlight php tab-php"><code>require 'users'
 
-api = Users::APIClient.authorize!('users')
-api.users.get("a541227f835746e953b22efctb25dce2")
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/byToken/a541227f835746e953b22efctb25dce2"</span>
-  -H <span class="s2">"Authorization: bearer 'authToken'"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
+<p>The Kittn API uses the following error codes:</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">users</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'users'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"a541227f835746e953b22efctb25dce2"</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a541227f835746e953b22efctb25dce2"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 16:00:00"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 17:00:00"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific user.</p>
-
-<aside class="warning">Test warning</aside>
-<h3 id='http-request-5'>HTTP Request</h3>
-<p><code>https://ibsettle.com/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>Error Code</th>
+<th>Meaning</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>token</td>
-<td>The token of the specific user to get</td>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
 </tr>
-</tbody></table>
-<h2 id='create-user-account-get-token-for-query-2'>Create user account (get token for query)</h2><pre class="highlight php tab-php"><code>php
-</code></pre><pre class="highlight shell tab-shell"><code>shell
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":(..."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint creates user account.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST https://ibsettle.com/kyc/api/users/create</code></p>
-<h3 id='required-post-parameters-2'>Required POST Parameters</h3>
-<table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
 </tr>
-</thead><tbody>
 <tr>
-<td>name</td>
-<td>The name of the user</td>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
 </tr>
-</tbody></table>
-<h3 id='optional-post-parameters-2'>Optional POST Parameters</h3>
-<table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
 </tr>
-</thead><tbody>
 <tr>
-<td>sourceOfFunds</td>
-<td>User source of funds</td>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="php">php</a>
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
       </div>
     </div>
   </body>
