@@ -365,7 +365,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 
 <aside class="warning">Token generation is on User create</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -547,7 +547,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 
 <aside class="warning">You will get token after User creation</aside>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -625,17 +625,21 @@ You must replace <code>authenticationToken</code> with your personal API key.
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<p>API uses the following error codes:</p>
+<p>API uses the following error messages:</p>
 
 <table><thead>
 <tr>
 <th>Error Code</th>
-<th>Meaning</th>
+<th>Meaning (Message)</th>
 </tr>
 </thead><tbody>
 <tr>
+<td>201</td>
+<td>Successful request.</td>
+</tr>
+<tr>
 <td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>Bad Request -- Your request is invalid. Data is incomplete.</td>
 </tr>
 <tr>
 <td>401</td>
