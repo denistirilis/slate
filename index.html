@@ -383,11 +383,11 @@ You must replace <code>authenticationToken</code> with your personal API key.
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
-<p>[required] The above command POST in JSON structure like this to get success message on form creation:</p>
+<p>The above command POST in JSON structure like this to get success message on form creation (required):</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
@@ -400,7 +400,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>[full] The above command POST in JSON structure like this to get success message on form creation:</p>
+<p>The above command POST in JSON structure like this to get success message on form creation (full):</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
@@ -652,6 +652,14 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <tr>
 <td>404</td>
 <td>Not Found -- The specified request could not be found.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- Form status or form does not exist.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- IBAN or form does not exist.</td>
 </tr>
 <tr>
 <td>405</td>
