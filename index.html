@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;php&quot;,&quot;shell&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,8 +211,8 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="php">php</a>
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="php">php</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -274,17 +274,18 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight php tab-php"><code>$curl = curl_init("api_endpoint_here");
+<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"api_endpoint_here"</span>
+  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
+</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("api_endpoint_here");
 
 curl_setopt(
   $curl, 
   CURLOPT_HTTPHEADER, 
   array(
     "Content-Type: application/json" , 
-    "Authorization: Bearer authenticationToken"))
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
+    "Authorization: Bearer authenticationToken"
+    ))
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
 
 <span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
@@ -302,9 +303,9 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 You must replace <code>authenticationToken</code> with your personal API key.
 </aside>
-<h1 id='users'>Users</h1><h2 id='create-user-request-token'>Create User (request token)</h2><pre class="highlight php tab-php"><code>php
-</code></pre><pre class="highlight shell tab-shell"><code>shell
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+<h1 id='users'>Users</h1><h2 id='create-user-request-token'>Create User (request token)</h2><pre class="highlight shell tab-shell"><code>Will be updated
+</code></pre><pre class="highlight php tab-php"><code>Will be updated
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command POST in JSON structure like this to get success message and generated token:</p>
@@ -344,10 +345,10 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>Token will be shown only on success message with user creation</td>
 </tr>
 </tbody></table>
-<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight php tab-php"><code>php
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;"</span>
+<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+</code></pre><pre class="highlight php tab-php"><code>Will be updated
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -377,9 +378,9 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>The token of the specific User to get</td>
 </tr>
 </tbody></table>
-<h1 id='forms'>Forms</h1><h2 id='create-form'>Create Form</h2><pre class="highlight php tab-php"><code>php
-</code></pre><pre class="highlight shell tab-shell"><code>shell
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+<h1 id='forms'>Forms</h1><h2 id='create-form'>Create Form</h2><pre class="highlight shell tab-shell"><code>Will be updated
+</code></pre><pre class="highlight php tab-php"><code>Will be updated
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>[required] The above command POST in JSON structure like this to get success message on form creation:</p>
@@ -395,8 +396,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
   </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
+  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -457,6 +457,36 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>User Residence Address</td>
 <td>maxlength =&gt; 150</td>
 </tr>
+<tr>
+<td>residencePostalCode</td>
+<td>User Residence Postal Code</td>
+<td>maxlength =&gt; 20</td>
+</tr>
+<tr>
+<td>residenceState</td>
+<td>User Residence State</td>
+<td>maxlength =&gt; 150</td>
+</tr>
+<tr>
+<td>residenceCity</td>
+<td>User Residence City</td>
+<td>maxlength =&gt; 100</td>
+</tr>
+<tr>
+<td>residenceCountry</td>
+<td>User Residence Country</td>
+<td>Remitter country code (2-letter ISO 3166-2 country code)</td>
+</tr>
+<tr>
+<td>personBirthDate</td>
+<td>User Birth of Date</td>
+<td>Format: 1990-01-01</td>
+</tr>
+<tr>
+<td>personCitizenship</td>
+<td>User Citizenship</td>
+<td>Remitter country code (2-letter ISO 3166-2 country code)</td>
+</tr>
 </tbody></table>
 <h3 id='optional-post-parameters'>Optional POST Parameters</h3>
 <table><thead>
@@ -481,10 +511,14 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>sourceOfFunds</td>
 <td>User source of funds</td>
 </tr>
+<tr>
+<td>merchantName</td>
+<td>Merchant Name</td>
+</tr>
 </tbody></table>
-<h2 id='get-form-by-token'>Get Form by token</h2><pre class="highlight php tab-php"><code>php
-</code></pre><pre class="highlight shell tab-shell"><code>shell
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+<h2 id='get-form-by-token'>Get Form by token</h2><pre class="highlight shell tab-shell"><code>Will be updated
+</code></pre><pre class="highlight php tab-php"><code>Will be updated
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -526,9 +560,9 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>The token of the specific user to get form</td>
 </tr>
 </tbody></table>
-<h2 id='get-form-query-status-by-token'>Get Form Query Status by token</h2><pre class="highlight php tab-php"><code>php
-</code></pre><pre class="highlight shell tab-shell"><code>shell
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+<h2 id='get-form-query-status-by-token'>Get Form Query Status by token</h2><pre class="highlight shell tab-shell"><code>Will be updated
+</code></pre><pre class="highlight php tab-php"><code>Will be updated
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -564,9 +598,9 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>&quot;Submitted&quot;, &quot;Reviewing&quot;, &quot;Rejected&quot;, &quot;On Boarded&quot;</td>
 </tr>
 </tbody></table>
-<h2 id='get-form-iban-by-token'>Get Form IBAN by token</h2><pre class="highlight php tab-php"><code>php
-</code></pre><pre class="highlight shell tab-shell"><code>shell
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">js</span>
+<h2 id='get-form-iban-by-token'>Get Form IBAN by token</h2><pre class="highlight shell tab-shell"><code>Will be updated
+</code></pre><pre class="highlight php tab-php"><code>Will be updated
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -591,11 +625,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -613,31 +643,23 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The request is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The specified request could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
 <td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests -- You&#39;re requesting too many requests!</td>
 </tr>
 <tr>
 <td>500</td>
@@ -652,8 +674,8 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="php">php</a>
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="php">php</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
