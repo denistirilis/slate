@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;,&quot;javascript&quot;,&quot;typescript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -214,6 +214,7 @@
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="php">php</a>
               <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="typescript">typescript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -255,13 +256,16 @@
               </ul>
           </li>
           <li>
+            <a href="#sign-up" class="toc-h1 toc-link" data-title="Sign Up">Sign Up</a>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='mailto:support@ibsettle.com'>Contact support</a></li>
             <li>All rights reserved © 2019 IBS Lithuania</li>
-            <li>Version 1.0.5 (2019-02-20)</li>
+            <li>Version 1.0.7 (2019-02-28)</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -286,10 +290,11 @@ curl_setopt(
   array(
     "Content-Type: application/json" , 
     "Authorization: Bearer authenticationToken"
-    ))
+    ));
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
 
 <span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
+</code></pre><pre class="highlight typescript tab-typescript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>Make sure to replace <code>authenticationToken</code> with your API key.</p>
@@ -307,6 +312,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <h1 id='users'>Users</h1><h2 id='create-user-request-token'>Create User (request token)</h2><pre class="highlight shell tab-shell"><code>Will be updated
 </code></pre><pre class="highlight php tab-php"><code>Will be updated
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
+</code></pre><pre class="highlight typescript tab-typescript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command POST in JSON structure like this to get success message and generated token:</p>
@@ -346,10 +352,11 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>Token will be shown only on success message with user creation</td>
 </tr>
 </tbody></table>
-<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;"</span>
+<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api/users/get/byToken/&lt;token&gt;"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
 </code></pre><pre class="highlight php tab-php"><code>Will be updated
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
+</code></pre><pre class="highlight typescript tab-typescript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -366,7 +373,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 
 <aside class="warning">Token generation is on User create</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -382,6 +389,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <h1 id='forms'>Forms</h1><h2 id='create-form'>Create Form</h2><pre class="highlight shell tab-shell"><code>Will be updated
 </code></pre><pre class="highlight php tab-php"><code>Will be updated
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
+</code></pre><pre class="highlight typescript tab-typescript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command POST in JSON structure like this to get success message on form creation (required):</p>
@@ -404,8 +412,8 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <p>The above command POST in JSON structure like this to get success message on form creation (full):</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
@@ -520,6 +528,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <h2 id='get-form-by-token'>Get Form by token</h2><pre class="highlight shell tab-shell"><code>Will be updated
 </code></pre><pre class="highlight php tab-php"><code>Will be updated
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
+</code></pre><pre class="highlight typescript tab-typescript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -548,7 +557,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 
 <aside class="warning">You will get token after User creation</aside>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api/users/get/byToken?token=&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -564,6 +573,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <h2 id='get-form-query-status-by-token'>Get Form Query Status by token</h2><pre class="highlight shell tab-shell"><code>Will be updated
 </code></pre><pre class="highlight php tab-php"><code>Will be updated
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
+</code></pre><pre class="highlight typescript tab-typescript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -574,7 +584,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 </span></code></pre>
 <p>This endpoint retrieves exact form by token and show query status.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api/forms/get/queryStatus?token=&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/kyc/api/forms/get/queryStatus/&lt;token&gt;</code></p>
 <h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -602,6 +612,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <h2 id='get-form-iban-by-token'>Get Form IBAN by token</h2><pre class="highlight shell tab-shell"><code>Will be updated
 </code></pre><pre class="highlight php tab-php"><code>Will be updated
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
+</code></pre><pre class="highlight typescript tab-typescript"><code><span class="nx">Will</span> <span class="nx">be</span> <span class="nx">updated</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -612,7 +623,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
 </span></code></pre>
 <p>This endpoint retrieves exact form by token and show iban number.</p>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api/forms/get/iban?token=&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/kyc/api/forms/get/iban/&lt;token&gt;</code></p>
 <h3 id='url-parameters-4'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -625,6 +636,10 @@ You must replace <code>authenticationToken</code> with your personal API key.
 <td>The token of the specific user to get form</td>
 </tr>
 </tbody></table>
+<h1 id='sign-up'>Sign Up</h1>
+<aside class="notice">
+Generated token you should use with our link: <code>https://ibsettle.com/kyc/sign-up/<b>clientEmail</b>/<b>authenticationToken</b></code>
+</aside>
 <h1 id='errors'>Errors</h1>
 <p>API uses the following error messages:</p>
 
@@ -690,6 +705,7 @@ You must replace <code>authenticationToken</code> with your personal API key.
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="php">php</a>
                 <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="typescript">typescript</a>
           </div>
       </div>
     </div>
