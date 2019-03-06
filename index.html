@@ -265,7 +265,7 @@
         <ul class="toc-footer">
             <li><a href='mailto:support@ibsettle.com'>Contact support</a></li>
             <li>All rights reserved © 2019 IBS Lithuania</li>
-            <li>Version 1.1.0 (2019-03-05)</li>
+            <li>Version 1.1.2 (2019-03-06)</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -273,7 +273,7 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <aside class="warning">
-You must replace <code>api-test</code> to <code>api</code> for production version.
+You must replace <code>/dev/kyc/api/</code> to <code>/kyc/api/</code> for production version.
 </aside>
 
 <p>Welcome to the IBS KYC API! You can use our API to access IBS Simplified Forms API endpoints, which can get information on user account details and forms queries in our database.</p>
@@ -315,9 +315,9 @@ curl_close($curl);
 <aside class="notice">
 You must replace <code>authenticationToken</code> with your personal API key.
 </aside>
-<h1 id='users'>Users</h1><h2 id='create-user-request-token'>Create User (request token)</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api-test/users/create/"</span>
+<h1 id='users'>Users</h1><h2 id='create-user-request-token'>Create User (request token)</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/users/create/"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/kyc/api-test/users/create/");
+</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/users/create/");
 curl_setopt(
     $curl,
     CURLOPT_HTTPHEADER,
@@ -346,7 +346,7 @@ $response = json_decode($json_response, true);
 </span></code></pre>
 <p>This endpoint creates user and generates token.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST https://ibsettle.com/kyc/api-test/users/create/</code></p>
+<p><code>POST https://ibsettle.com/dev/kyc/api/users/create/</code></p>
 <h3 id='required-post-parameters'>Required POST Parameters</h3>
 <table><thead>
 <tr>
@@ -375,9 +375,9 @@ $response = json_decode($json_response, true);
 <td>Token will be shown only on success message with user creation</td>
 </tr>
 </tbody></table>
-<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api-test/users/get/byToken/&lt;token&gt;"</span>
+<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/users/get/byToken/&lt;token&gt;"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/kyc/api-test/users/get/byToken/<span class="nt">&lt;token&gt;</span>");
+</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/users/get/byToken/<span class="nt">&lt;token&gt;</span>");
 curl_setopt(
     $curl,
     CURLOPT_HTTPHEADER,
@@ -410,7 +410,7 @@ $response = json_decode($json_response, true);
 
 <aside class="warning">Token generation is on User create</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api-test/users/get/byToken/&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/dev/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -423,9 +423,9 @@ $response = json_decode($json_response, true);
 <td>The token of the specific User to get</td>
 </tr>
 </tbody></table>
-<h1 id='forms'>Forms</h1><h2 id='create-form'>Create Form</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api-test/forms/create/"</span>
+<h1 id='forms'>Forms</h1><h2 id='create-form'>Create Form</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/create/"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/kyc/api-test/forms/create/");
+</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/forms/create/");
 curl_setopt(
     $curl,
     CURLOPT_HTTPHEADER,
@@ -486,7 +486,7 @@ $response = json_decode($json_response, true);
 </span></code></pre>
 <p>This endpoint creates form query for user.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST https://ibsettle.com/kyc/api-test/forms/create/</code></p>
+<p><code>POST https://ibsettle.com/dev/kyc/api/forms/create/</code></p>
 <h3 id='required-post-parameters-2'>Required POST Parameters</h3>
 <table><thead>
 <tr>
@@ -579,9 +579,9 @@ $response = json_decode($json_response, true);
 <td>Merchant Name</td>
 </tr>
 </tbody></table>
-<h2 id='get-form-by-token'>Get Form by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api-test/forms/get/byToken/&lt;token&gt;"</span>
+<h2 id='get-form-by-token'>Get Form by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/byToken/&lt;token&gt;"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/kyc/api-test/forms/get/byToken/<span class="nt">&lt;token&gt;</span>");
+</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/forms/get/byToken/<span class="nt">&lt;token&gt;</span>");
 curl_setopt(
     $curl,
     CURLOPT_HTTPHEADER,
@@ -626,7 +626,7 @@ $response = json_decode($json_response, true);
 
 <aside class="warning">You will get token after User creation</aside>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api-test/users/get/byToken/&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/dev/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -639,9 +639,9 @@ $response = json_decode($json_response, true);
 <td>The token of the specific user to get form</td>
 </tr>
 </tbody></table>
-<h2 id='get-form-query-status-by-token'>Get Form Query Status by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api-test/forms/get/queryStatus/&lt;token&gt;"</span>
+<h2 id='get-form-query-status-by-token'>Get Form Query Status by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/&lt;token&gt;"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/kyc/api-test/forms/get/queryStatus/<span class="nt">&lt;token&gt;</span>");
+</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/<span class="nt">&lt;token&gt;</span>");
 curl_setopt(
     $curl,
     CURLOPT_HTTPHEADER,
@@ -668,7 +668,7 @@ $response = json_decode($json_response, true);
 </span></code></pre>
 <p>This endpoint retrieves exact form by token and show query status.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api-test/forms/get/queryStatus/&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/&lt;token&gt;</code></p>
 <h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -693,9 +693,9 @@ $response = json_decode($json_response, true);
 <td>&quot;Not Finished&quot;, &quot;Reviewing&quot;, &quot;Rejected&quot; / &quot;On Boarded&quot;</td>
 </tr>
 </tbody></table>
-<h2 id='get-form-iban-by-token'>Get Form IBAN by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/kyc/api-test/forms/get/iban/&lt;token&gt;"</span>
+<h2 id='get-form-iban-by-token'>Get Form IBAN by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/iban/&lt;token&gt;"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/kyc/api-test/users/get/iban/<span class="nt">&lt;token&gt;</span>");
+</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/users/get/iban/<span class="nt">&lt;token&gt;</span>");
 curl_setopt(
     $curl,
     CURLOPT_HTTPHEADER,
@@ -723,7 +723,7 @@ $response = json_decode($json_response, true);
 <p>This endpoint retrieves exact form by token and show IBAN number.<br/>
 IBAN is filled only when clien&#39;t queryStatus is &quot;On Boarded&quot;.</p>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/kyc/api-test/forms/get/iban/&lt;token&gt;</code></p>
+<p><code>GET https://ibsettle.com/dev/kyc/api/forms/get/iban/&lt;token&gt;</code></p>
 <h3 id='url-parameters-4'>URL Parameters</h3>
 <table><thead>
 <tr>
