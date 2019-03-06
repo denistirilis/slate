@@ -248,10 +248,7 @@
                     <a href="#get-form-by-token" class="toc-h2 toc-link" data-title="Get Form by token">Get Form by token</a>
                   </li>
                   <li>
-                    <a href="#get-form-query-status-by-token" class="toc-h2 toc-link" data-title="Get Form Query Status by token">Get Form Query Status by token</a>
-                  </li>
-                  <li>
-                    <a href="#get-form-iban-by-token" class="toc-h2 toc-link" data-title="Get Form IBAN by token">Get Form IBAN by token</a>
+                    <a href="#get-form-query-status-and-with-that-iban-if-querystatus-is-quot-on-boarded-quot-by-token" class="toc-h2 toc-link" data-title="Get Form Query Status and with that IBAN (if queryStatus is "On Boarded") by token">Get Form Query Status and with that IBAN (if queryStatus is "On Boarded") by token</a>
                   </li>
               </ul>
           </li>
@@ -265,7 +262,7 @@
         <ul class="toc-footer">
             <li><a href='mailto:support@ibsettle.com'>Contact support</a></li>
             <li>All rights reserved © 2019 IBS Lithuania</li>
-            <li>Version 1.1.2 (2019-03-06)</li>
+            <li>Version 1.1.3 (2019-03-06)</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -342,6 +339,15 @@ $response = json_decode($json_response, true);
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example3@example.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>The above command include &quot;return_url&quot; and &quot;next_url&quot; POST in JSON structure like this to get success message and generated token, these two parameters are optional:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example3@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"return_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://return-url.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://next-url.com/"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint creates user and generates token.</p>
@@ -639,7 +645,7 @@ $response = json_decode($json_response, true);
 <td>The token of the specific user to get form</td>
 </tr>
 </tbody></table>
-<h2 id='get-form-query-status-by-token'>Get Form Query Status by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/&lt;token&gt;"</span>
+<h2 id='get-form-query-status-and-with-that-iban-if-querystatus-is-quot-on-boarded-quot-by-token'>Get Form Query Status and with that IBAN (if queryStatus is &quot;On Boarded&quot;) by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/&lt;token&gt;"</span>
   -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
 </code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/<span class="nt">&lt;token&gt;</span>");
 curl_setopt(
@@ -663,7 +669,15 @@ $response = json_decode($json_response, true);
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"queryStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Query Status"</span><span class="w">
+  </span><span class="s2">"queryStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not Finished / Reviewing"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this if queryStatus &quot;On Boarded&quot;:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"queryStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"On Boarded"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"IBAN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IBAN Account number"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves exact form by token and show query status.</p>
@@ -691,49 +705,6 @@ $response = json_decode($json_response, true);
 <tr>
 <td>queryStatus</td>
 <td>&quot;Not Finished&quot;, &quot;Reviewing&quot;, &quot;Rejected&quot; / &quot;On Boarded&quot;</td>
-</tr>
-</tbody></table>
-<h2 id='get-form-iban-by-token'>Get Form IBAN by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/iban/&lt;token&gt;"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/users/get/iban/<span class="nt">&lt;token&gt;</span>");
-curl_setopt(
-    $curl,
-    CURLOPT_HTTPHEADER,
-    array(
-        "Content-Type: application/json" ,
-        "Authorization: Bearer authenticationToken"
-    ));
-$json_response = curl_exec($curl);
-curl_close($curl);
-$response = json_decode($json_response, true);
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"iban"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IBAN number"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves exact form by token and show IBAN number.<br/>
-IBAN is filled only when clien&#39;t queryStatus is &quot;On Boarded&quot;.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/dev/kyc/api/forms/get/iban/&lt;token&gt;</code></p>
-<h3 id='url-parameters-4'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>The token of the specific user to get form</td>
 </tr>
 </tbody></table>
 <h1 id='sign-up'>Sign Up</h1>
