@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>IBS KYC API</title>
+    <title>IBS XLS to XML converter documentation</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;,&quot;javascript&quot;,&quot;typescript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,12 +210,6 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="php">php</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-              <a href="#" data-language-name="typescript">typescript</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -225,555 +219,387 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#users" class="toc-h1 toc-link" data-title="Users">Users</a>
+            <a href="#rules" class="toc-h1 toc-link" data-title="Rules">Rules</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-user-request-token" class="toc-h2 toc-link" data-title="Create User (request token)">Create User (request token)</a>
+                    <a href="#rules-for-xls" class="toc-h2 toc-link" data-title="Rules for XLS">Rules for XLS</a>
                   </li>
                   <li>
-                    <a href="#get-user-by-token" class="toc-h2 toc-link" data-title="Get User by token">Get User by token</a>
+                    <a href="#rules-for-xml" class="toc-h2 toc-link" data-title="Rules for XML">Rules for XML</a>
+                  </li>
+                  <li>
+                    <a href="#naming-explanations" class="toc-h2 toc-link" data-title="Naming explanations">Naming explanations</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#forms" class="toc-h1 toc-link" data-title="Forms">Forms</a>
+            <a href="#examples" class="toc-h1 toc-link" data-title="Examples">Examples</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-form" class="toc-h2 toc-link" data-title="Create Form">Create Form</a>
-                  </li>
-                  <li>
-                    <a href="#get-form-by-token" class="toc-h2 toc-link" data-title="Get Form by token">Get Form by token</a>
-                  </li>
-                  <li>
-                    <a href="#get-form-query-status-and-with-that-iban-if-querystatus-is-quot-on-boarded-quot-by-token" class="toc-h2 toc-link" data-title="Get Form Query Status and with that IBAN (if queryStatus is "On Boarded") by token">Get Form Query Status and with that IBAN (if queryStatus is "On Boarded") by token</a>
+                    <a href="#from-xls-to-xml" class="toc-h2 toc-link" data-title="From XLS to XML">From XLS to XML</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#sign-up" class="toc-h1 toc-link" data-title="Sign Up">Sign Up</a>
-          </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='mailto:support@ibsettle.com'>Contact support</a></li>
             <li>All rights reserved © 2019 IBS Lithuania</li>
-            <li>Version 1.1.4 (2019-03-13)</li>
+            <li>Version 1.0.0 (2019-04-01)</li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<aside class="warning">
-You must replace <code>/dev/kyc/api/</code> to <code>/kyc/api/</code> for production version.
-</aside>
+<p>Welcome to the IBS XLS to XML converter documentation!</p>
 
-<p>Welcome to the IBS KYC API! You can use our API to access IBS Simplified Forms API endpoints, which can get information on user account details and forms queries in our database.</p>
-
-<p>We have language bindings in PHP, Shell and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("api_endpoint_here");
-curl_setopt(
-    $curl,
-    CURLOPT_HTTPHEADER,
-    array(
-        "Content-Type: application/json" ,
-        "Authorization: Bearer authenticationToken"
-    ));
-curl_close($curl);
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>authenticationToken</code> with your API key.</p>
-</blockquote>
-
-<p>Bearer Authentication key allow access to the API. You can get authentication token by contacting our <a href="mailto:support@ibsettle.com">support</a>.</p>
-
-<p>Authentication token must be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: Bearer authenticationToken</code></p>
-
-<aside class="notice">
-You must replace <code>authenticationToken</code> with your personal API key.
-</aside>
-<h1 id='users'>Users</h1><h2 id='create-user-request-token'>Create User (request token)</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/users/create/"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/users/create/");
-curl_setopt(
-    $curl,
-    CURLOPT_HTTPHEADER,
-    array(
-        "Content-Type: application/json" ,
-        "Authorization: Bearer authenticationToken"
-    ));
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, "postContent");
-$json_response = curl_exec($curl);
-curl_close($curl);
-$response = json_decode($json_response, true);
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command POST in JSON structure like this to get success message and generated token:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example3@example.com"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>The above command include &quot;return_url&quot; and &quot;next_url&quot; POST in JSON structure like this to get success message and generated token, these two parameters are optional:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example3@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"return_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://return-url.com/"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"next_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://next-url.com/"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint creates user and generates token.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>POST https://ibsettle.com/dev/kyc/api/users/create/</code></p>
-<h3 id='required-post-parameters'>Required POST Parameters</h3>
+<p>Here you can find all information about how to use XLS to XML converter.</p>
+<h1 id='rules'>Rules</h1><h2 id='rules-for-xls'>Rules for XLS</h2>
+<p>In this section you can find all rules for XLS file</p>
+<h3 id='required-parameters'>Required Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Example</th>
+<th>Routing in XML</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Initiation date</td>
+<td>Requested Execution Date</td>
+<td>2019-04-01</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; ReqdExctnDt</td>
+</tr>
+<tr>
+<td>Name (initiator)</td>
+<td>Initiator name</td>
+<td>[Name surname / Company Name Ltd.]</td>
+<td>CstmrCdtTrfInitn &gt; GrpHdr &gt; InitgPty &gt; Nm</td>
+</tr>
+<tr>
+<td>Name (debtor)</td>
+<td>Debtor name</td>
+<td>[Name surname / Company Name Ltd.]</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; Dbtr &gt; Nm</td>
+</tr>
+<tr>
+<td>IBAN (debtor)</td>
+<td>Debtor IBAN number</td>
+<td>LT103910020000000062</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAcct &gt; Id &gt; IBAN</td>
+</tr>
+<tr>
+<td>Name (receiver)</td>
+<td>Receiver name</td>
+<td>[Name surname / Company Name Ltd.]</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; Cdtr &gt; Nm</td>
+</tr>
+<tr>
+<td>IBAN (receiver)</td>
+<td>Receiver IBAN number</td>
+<td>LT237300010111179102</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAcct &gt; Id &gt; IBAN</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>Payment amount</td>
+<td>1000.00</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; Amt &gt; InstdAmt Ccy=&quot;EUR&quot;</td>
+</tr>
+<tr>
+<td>Purpose code</td>
+<td>Payment purpose code</td>
+<td>SLR001</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; Purp</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Payment purpose</td>
+<td>Salary January</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; RmtInf &gt; Ustrd</td>
+</tr>
+</tbody></table>
+<h3 id='optional-parameters'>Optional Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Example</th>
+<th>Routing in XML</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>email</td>
-<td>The email of the user</td>
+<td>BIC (debtor)</td>
+<td>Bank code</td>
+<td>IBIULT21XXX</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAgt &gt; FinInstnId &gt; BIC</td>
 </tr>
 </tbody></table>
-<h3 id='parameters-on-result'>Parameters on result</h3>
+<h2 id='rules-for-xml'>Rules for XML</h2>
+<p>In Document &gt; CstmrCdtTrfInitn</p>
+
+<p>There is two types of XML Schema extension:</p>
+
+<p><b>1.</b>   GrpHdr (Group Header – main information about payment(-s), initiator name)</p>
+
+<p><b>2.</b>   PmtInf (Payment Information - debtor and receiver)</p>
+<h3 id='required-parameters-2'>Required Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Category</th>
+<th>Parameter(-s)</th>
 <th>Description</th>
+<th>Explanation</th>
+<th>Naming in XLS</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>message</td>
-<td>Success and Error messages</td>
-</tr>
-<tr>
-<td>token</td>
-<td>Token will be shown only on success message with user creation</td>
-</tr>
-</tbody></table>
-<h2 id='get-user-by-token'>Get User by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/users/get/byToken/&lt;token&gt;"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/users/get/byToken/<span class="nt">&lt;token&gt;</span>");
-curl_setopt(
-    $curl,
-    CURLOPT_HTTPHEADER,
-    array(
-        "Content-Type: application/json" ,
-        "Authorization: Bearer authenticationToken"
-    ));
-$json_response = curl_exec($curl);
-curl_close($curl);
-$response = json_decode($json_response, true);
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a541227f835746e953b22efctb25dce2"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example1@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 16:00:00"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-14 17:00:00"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific user by token.</p>
-
-<aside class="warning">Token generation is on User create</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/dev/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>The token of the specific User to get</td>
-</tr>
-</tbody></table>
-<h1 id='forms'>Forms</h1><h2 id='create-form'>Create Form</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/create/"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/forms/create/");
-curl_setopt(
-    $curl,
-    CURLOPT_HTTPHEADER,
-    array(
-        "Content-Type: application/json" ,
-        "Authorization: Bearer authenticationToken"
-    ));
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, "postContent");
-$json_response = curl_exec($curl);
-curl_close($curl);
-$response = json_decode($json_response, true);
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command POST in JSON structure like this to get success message on form creation (required):</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>The above command POST in JSON structure like this to get success message on form creation (full):</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39001010001"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yes/No (optional:default is No)"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"additionalDetailsPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceOfFunds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint creates form query for user.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST https://ibsettle.com/dev/kyc/api/forms/create/</code></p>
-<h3 id='required-post-parameters-2'>Required POST Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Requirements</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>Token for user detect</td>
-<td>hash token code which you get after User creation</td>
-</tr>
-<tr>
-<td>name</td>
-<td>User Name and Surname</td>
-<td>minlength =&gt; 1, maxlength =&gt; 150</td>
-</tr>
-<tr>
-<td>email</td>
-<td>User Email Address</td>
-<td>E-mail validation</td>
-</tr>
-</tbody></table>
-<h3 id='optional-post-parameters'>Optional POST Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>personCode</td>
-<td>User person code</td>
-</tr>
-<tr>
-<td>personBirthDate</td>
-<td>User Birth of Date</td>
-</tr>
-<tr>
-<td>personCitizenship</td>
-<td>User Citizenship</td>
-</tr>
-<tr>
-<td>personPE</td>
-<td>User Politicaly Exposed (Yes / No)</td>
-</tr>
-<tr>
-<td>additionalDetailsPE</td>
-<td>If User Politicaly Exposed (Yes) then fill additional details</td>
-</tr>
-<tr>
-<td>phone</td>
-<td>User Phone Number</td>
-</tr>
-<tr>
-<td>residenceAddress</td>
-<td>User Residence Address</td>
-</tr>
-<tr>
-<td>residencePostalCode</td>
-<td>User Residence Postal Code</td>
-</tr>
-<tr>
-<td>residenceState</td>
-<td>User Residence State</td>
-</tr>
-<tr>
-<td>residenceCity</td>
-<td>User Residence City</td>
-</tr>
-<tr>
-<td>residenceCountry</td>
-<td>User Residence Country</td>
-</tr>
-<tr>
-<td>sourceOfFunds</td>
-<td>User source of funds</td>
-</tr>
-<tr>
-<td>merchantName</td>
-<td>Merchant Name</td>
-</tr>
-</tbody></table>
-<h2 id='get-form-by-token'>Get Form by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/byToken/&lt;token&gt;"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/forms/get/byToken/<span class="nt">&lt;token&gt;</span>");
-curl_setopt(
-    $curl,
-    CURLOPT_HTTPHEADER,
-    array(
-        "Content-Type: application/json" ,
-        "Authorization: Bearer authenticationToken"
-    ));
-$json_response = curl_exec($curl);
-curl_close($curl);
-$response = json_decode($json_response, true);
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54366hd7f835756e934498eccbb55da9"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name Surname"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example2@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37061234567"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street address"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residencePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"residenceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39001010001"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personBirthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personCitizenship"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"personPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yes/No (optional:default is No)"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"additionalDetailsPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceOfFunds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(optional)"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant Name"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific user.</p>
-
-<aside class="warning">You will get token after User creation</aside>
-<h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/dev/kyc/api/users/get/byToken/&lt;token&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>The token of the specific user to get form</td>
-</tr>
-</tbody></table>
-<h2 id='get-form-query-status-and-with-that-iban-if-querystatus-is-quot-on-boarded-quot-by-token'>Get Form Query Status and with that IBAN (if queryStatus is &quot;On Boarded&quot;) by token</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/&lt;token&gt;"</span>
-  -H <span class="s2">"Authorization: Bearer authenticationToken"</span>
-</code></pre><pre class="highlight php tab-php"><code>$curl = curl_init("https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/<span class="nt">&lt;token&gt;</span>");
-curl_setopt(
-    $curl,
-    CURLOPT_HTTPHEADER,
-    array(
-        "Content-Type: application/json" ,
-        "Authorization: Bearer authenticationToken"
-    ));
-$json_response = curl_exec($curl);
-curl_close($curl);
-$response = json_decode($json_response, true);
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'api_endpoint_here'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">authToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'authenticationToken'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"queryStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not Finished / Reviewing"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this if queryStatus &quot;Onboarded&quot;:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"queryStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Onboarded"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"IBAN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IBAN Account number"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves exact form by token and show query status.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET https://ibsettle.com/dev/kyc/api/forms/get/queryStatus/&lt;token&gt;</code></p>
-<h3 id='url-parameters-3'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>The token of the specific user to get form</td>
-</tr>
-</tbody></table>
-<h3 id='query-statuses'>Query Statuses</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>queryStatus</td>
-<td>&quot;Not Finished&quot;, &quot;Reviewing&quot;, &quot;Rejected&quot; / &quot;On Boarded&quot;</td>
-</tr>
-</tbody></table>
-<h1 id='sign-up'>Sign Up</h1>
-<aside class="notice">
-Generated token you should use with our link: <code>https://ibsettle.com/dev/kyc/sign-up/<b>clientEmail</b>/<b>authenticationToken</b></code>
-</aside>
-
-<aside class="warning">
-Change URL to <code>https://ibsettle.com/kyc/sign-up/<b>clientEmail</b>/<b>authenticationToken</b></code> for production using.
-</aside>
-<h1 id='errors'>Errors</h1>
-<p>API uses the following error messages:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>201</td>
-<td>Successful request / Token generated.</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad Request - Your request is invalid. Data is incomplete.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized - Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden - The request is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found - The specified request could not be found.</td>
+<td>CstmrCdtTrfInitn &gt; GrpHdr</td>
+<td></td>
+<td>Main information Group Header</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td></td>
-<td>Not Found - Form status or form does not exist.</td>
+<td>MsgId</td>
+<td>must be generated unique (from 7-35 symbols)</td>
+<td>Autogenerated</td>
+<td></td>
 </tr>
 <tr>
 <td></td>
-<td>Not Found - IBAN or form does not exist.</td>
+<td>CreDtTm</td>
+<td>datetime of generation date (format example: 2019-03-27T13:15)</td>
+<td>Autogenerated</td>
+<td></td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed - You tried to access invalid method.</td>
+<td></td>
+<td>NbOfTxs</td>
+<td>number of transactions (number of payments from XLS)</td>
+<td>Count number of payments list</td>
+<td></td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable - You requested a format that isn&#39;t json.</td>
+<td></td>
+<td>CtrlSum</td>
+<td>control sum is amount of all payments (total)</td>
+<td>Count total amount of all payments</td>
+<td></td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests - You&#39;re requesting too many requests!</td>
+<td></td>
+<td>InitgPty</td>
+<td>it is initiator information block</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>500</td>
-<td>Internal Server Error - We had a problem with our server. Try again later.</td>
+<td></td>
+<td>InitgPty &gt; Nm</td>
+<td>Initiator name, can be organisation or person</td>
+<td>example: [Name Surname / Company Name Ltd.]</td>
+<td>Initiator name</td>
 </tr>
 <tr>
-<td>503</td>
-<td>Service Unavailable - We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>CstmrCdtTrfInitn &gt; PmtInf</td>
+<td></td>
+<td>Payment information</td>
+<td>this could be multiple (each block)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>PmtInfId</td>
+<td>must be generated unique (from 7-35 symbols)</td>
+<td>Autogenerated</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>PmtMtd</td>
+<td>must be TRF</td>
+<td>TRF</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>NbOfTxs</td>
+<td>must be 1</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>CtrlSum</td>
+<td>there must be the amount of exact payment</td>
+<td>from input <code>Amount</code></td>
+<td>Amount</td>
+</tr>
+<tr>
+<td></td>
+<td>PmtTpInf &gt; SvcLvl &gt; Cd</td>
+<td>must be SEPA</td>
+<td>SEPA</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>ReqdExctnDt</td>
+<td>date when to do payment</td>
+<td>from input <code>Initiation date</code></td>
+<td>Initiation date</td>
+</tr>
+<tr>
+<td></td>
+<td>Dbtr</td>
+<td>Debtor name</td>
+<td>from input <code>Name (debtor)</code></td>
+<td>Name (debtor)</td>
 </tr>
 </tbody></table>
+<h3 id='optional-parameters-2'>Optional Parameters</h3>
+<table><thead>
+<tr>
+<th>Category</th>
+<th>Parameter(-s)</th>
+<th>Description</th>
+<th>Explanation</th>
+<th>Naming in XLS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CstmrCdtTrfInitn &gt; PmtInf</td>
+<td></td>
+<td>Payment information</td>
+<td>this could be multiple (each block)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Dbtr &gt; PstlAdr &gt; Ctry</td>
+<td>Debtor country</td>
+<td>from input <code>Country (debtor)</code> it must go with Address (debtor)</td>
+<td>Country (debtor)</td>
+</tr>
+<tr>
+<td></td>
+<td>Dbtr &gt; PstlAdr &gt; AdrLine</td>
+<td>Debtor address line</td>
+<td>from input <code>Address (debtor)</code> it must go with Country (debtor)</td>
+<td>Address (debtor)</td>
+</tr>
+<tr>
+<td></td>
+<td>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</td>
+<td>Debtor code</td>
+<td>from input <code>Code (debtor)</code> it must go with Type (debtor) and Identification type (debtor)</td>
+<td>Code (debtor)</td>
+</tr>
+<tr>
+<td></td>
+<td>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</td>
+<td>Debtor identification type</td>
+<td>from input <code>Identification type (debtor)</code> it must go with Type (debtor) and Code (debtor)</td>
+<td>Identification type (debtor)</td>
+</tr>
+<tr>
+<td></td>
+<td>DbtrAgt &gt; FinInstnId &gt; BIC</td>
+<td>Debtor bank code</td>
+<td>from input <code>BIC (debtor)</code></td>
+<td>BIC (debtor)</td>
+</tr>
+<tr>
+<td></td>
+<td>CdtTrfTxInf &gt; Cdtr &gt; PstlAdr &gt; Ctry</td>
+<td>Debtor country</td>
+<td>from input <code>Country (receiver)</code> it must go with Address (receiver)</td>
+<td>Country (receiver)</td>
+</tr>
+<tr>
+<td></td>
+<td>CdtTrfTxInf &gt; Cdtr  &gt; PstlAdr &gt; AdrLine</td>
+<td>Debtor address line</td>
+<td>from input <code>Address (receiver)</code> it must go with Country (receiver)</td>
+<td>Address (receiver)</td>
+</tr>
+<tr>
+<td></td>
+<td>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</td>
+<td>Debtor code</td>
+<td>from input <code>Code (receiver)</code> it must go with Type (receiver) and Identification type (receiver)</td>
+<td>Code (receiver)</td>
+</tr>
+<tr>
+<td></td>
+<td>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</td>
+<td>Debtor identification type</td>
+<td>from input <code>Identification type (receiver)</code> it must go with Type (receiver) and Code (receiver)</td>
+<td>Identification type (receiver)</td>
+</tr>
+<tr>
+<td></td>
+<td>CdtTrfTxInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</td>
+<td>Receiver bank code</td>
+<td>from input <code>BIC (receiver)</code></td>
+<td>BIC (receiver)</td>
+</tr>
+</tbody></table>
+<h2 id='naming-explanations'>Naming explanations</h2>
+<table><thead>
+<tr>
+<th>XLS</th>
+<th>XML</th>
+<th>Routing in XML</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Company number</td>
+<td>Cd &gt; COID</td>
+<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; OrgId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+</tr>
+<tr>
+<td>Person code</td>
+<td>Cd &gt; NIDN</td>
+<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+</tr>
+<tr>
+<td>Driving licence number</td>
+<td>Cd &gt; DRLC</td>
+<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+</tr>
+<tr>
+<td>Passport number</td>
+<td>Cd &gt; CCPT</td>
+<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+</tr>
+<tr>
+<td>Type (debtor)</td>
+<td>[PrvtId / OrgId]</td>
+<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</td>
+</tr>
+<tr>
+<td>Type (receiver)</td>
+<td>[PrvtId / OrgId]</td>
+<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</td>
+</tr>
+</tbody></table>
+<h1 id='examples'>Examples</h1><h2 id='from-xls-to-xml'>From XLS to XML</h2>
+<p>You need to create <a href="https://www.ibsettle.com/converter/examples/payments.xls">XLS</a> file with our structure to convert it to <a href="https://www.ibsettle.com/converter/examples/payments.xml">XML</a></p>
+
+<aside class="notice">
+Excel (XLS) file you can find: <code>https://www.ibsettle.com/converter/examples/payments.xls</code>
+</aside>
+
+<aside class="notice">
+XML example file you can find: <code>https://www.ibsettle.com/converter/examples/payments.xml</code>
+</aside>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="php">php</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-                <a href="#" data-language-name="typescript">typescript</a>
-          </div>
       </div>
     </div>
   </body>
