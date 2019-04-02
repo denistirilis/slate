@@ -244,7 +244,7 @@
         <ul class="toc-footer">
             <li><a href='mailto:support@ibsettle.com'>Contact support</a></li>
             <li>All rights reserved © 2019 IBS Lithuania</li>
-            <li>Version 1.0.0 (2019-04-01)</li>
+            <li>Version 1.0.4 (2019-04-02)</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -262,62 +262,62 @@
 <th>Name</th>
 <th>Description</th>
 <th>Example</th>
-<th>Routing in XML</th>
+<th>Mapping in XML</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Initiation date</td>
 <td>Requested Execution Date</td>
 <td>2019-04-01</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; ReqdExctnDt</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; ReqdExctnDt</code></td>
 </tr>
 <tr>
 <td>Name (initiator)</td>
-<td>Initiator name</td>
+<td>Debtor name here also</td>
 <td>[Name surname / Company Name Ltd.]</td>
-<td>CstmrCdtTrfInitn &gt; GrpHdr &gt; InitgPty &gt; Nm</td>
+<td><code>CstmrCdtTrfInitn &gt; GrpHdr &gt; InitgPty &gt; Nm</code></td>
 </tr>
 <tr>
-<td>Name (debtor)</td>
+<td>Name (payer)</td>
 <td>Debtor name</td>
 <td>[Name surname / Company Name Ltd.]</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; Dbtr &gt; Nm</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; Dbtr &gt; Nm</code></td>
 </tr>
 <tr>
-<td>IBAN (debtor)</td>
+<td>IBAN (payer)</td>
 <td>Debtor IBAN number</td>
 <td>LT103910020000000062</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAcct &gt; Id &gt; IBAN</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAcct &gt; Id &gt; IBAN</code></td>
 </tr>
 <tr>
-<td>Name (receiver)</td>
+<td>Name (beneficiary)</td>
 <td>Receiver name</td>
 <td>[Name surname / Company Name Ltd.]</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; Cdtr &gt; Nm</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; Cdtr &gt; Nm</code></td>
 </tr>
 <tr>
-<td>IBAN (receiver)</td>
+<td>IBAN (beneficiary)</td>
 <td>Receiver IBAN number</td>
 <td>LT237300010111179102</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAcct &gt; Id &gt; IBAN</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAcct &gt; Id &gt; IBAN</code></td>
 </tr>
 <tr>
 <td>Amount</td>
 <td>Payment amount</td>
 <td>1000.00</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; Amt &gt; InstdAmt Ccy=&quot;EUR&quot;</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; Amt &gt; InstdAmt Ccy=&quot;EUR&quot;</code></td>
 </tr>
 <tr>
 <td>Purpose code</td>
 <td>Payment purpose code</td>
 <td>SLR001</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; Purp</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; Purp</code></td>
 </tr>
 <tr>
 <td>Purpose</td>
 <td>Payment purpose</td>
 <td>Salary January</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; RmtInf &gt; Ustrd</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtTrfTxInf &gt; RmtInf &gt; Ustrd</code></td>
 </tr>
 </tbody></table>
 <h3 id='optional-parameters'>Optional Parameters</h3>
@@ -326,14 +326,80 @@
 <th>Parameter</th>
 <th>Description</th>
 <th>Example</th>
-<th>Routing in XML</th>
+<th>Mapping in XML</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>BIC (debtor)</td>
+<td>BIC (payer)</td>
 <td>Bank code</td>
 <td>IBIULT21XXX</td>
-<td>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAgt &gt; FinInstnId &gt; BIC</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAgt &gt; FinInstnId &gt; BIC</code></td>
+</tr>
+<tr>
+<td>BIC (beneficiary)</td>
+<td>Bank code</td>
+<td>HABALT22XXX</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</code></td>
+</tr>
+<tr>
+<td>Country (payer)</td>
+<td>Country code (two letters)</td>
+<td>LT</td>
+<td><code>Dbtr &gt; PstlAdr &gt; Ctry</code></td>
+</tr>
+<tr>
+<td>Address (payer)</td>
+<td>Address</td>
+<td>Address str. 123-321, Vilnius</td>
+<td><code>Dbtr &gt; PstlAdr &gt; AdrLine</code></td>
+</tr>
+<tr>
+<td>Type (payer)</td>
+<td>Type of payer</td>
+<td>Personal / Organisation</td>
+<td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</code></td>
+</tr>
+<tr>
+<td>Identification type (payer)</td>
+<td>Identification type</td>
+<td>Company code, Person code, Passport, Driving licence</td>
+<td><code>Dbtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
+</tr>
+<tr>
+<td>Code (payer)</td>
+<td>Payer code</td>
+<td>123456456</td>
+<td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
+</tr>
+<tr>
+<td>Country (beneficiary)</td>
+<td>Country code (two letters)</td>
+<td>LT</td>
+<td><code>CdtTrfTxInf &gt; Cdtr &gt; PstlAdr &gt; Ctry</code></td>
+</tr>
+<tr>
+<td>Address (beneficiary)</td>
+<td>Address</td>
+<td>Address str. 123-321, Vilnius</td>
+<td><code>CdtTrfTxInf &gt; Cdtr  &gt; PstlAdr &gt; AdrLine</code></td>
+</tr>
+<tr>
+<td>Type (beneficiary)</td>
+<td>Type of beneficiary</td>
+<td>Personal / Organisation</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</code></td>
+</tr>
+<tr>
+<td>Identification type (beneficiary)</td>
+<td>Identification type</td>
+<td>Company code, Person code, Passport, Driving licence</td>
+<td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
+</tr>
+<tr>
+<td>Code (beneficiary)</td>
+<td>Beneficiary code</td>
+<td>945651233</td>
+<td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 </tbody></table>
 <h2 id='rules-for-xml'>Rules for XML</h2>
@@ -343,7 +409,7 @@
 
 <p><b>1.</b>   GrpHdr (Group Header – main information about payment(-s), initiator name)</p>
 
-<p><b>2.</b>   PmtInf (Payment Information - debtor and receiver)</p>
+<p><b>2.</b>   PmtInf (Payment Information - debtor and receiver, it can be multiple or single)</p>
 <h3 id='required-parameters-2'>Required Parameters</h3>
 <table><thead>
 <tr>
@@ -355,7 +421,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>CstmrCdtTrfInitn &gt; GrpHdr</td>
+<td><code>CstmrCdtTrfInitn &gt; GrpHdr</code></td>
 <td></td>
 <td>Main information Group Header</td>
 <td></td>
@@ -363,48 +429,48 @@
 </tr>
 <tr>
 <td></td>
-<td>MsgId</td>
+<td><code>MsgId</code></td>
 <td>must be generated unique (from 7-35 symbols)</td>
 <td>Autogenerated</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>CreDtTm</td>
+<td><code>CreDtTm</code></td>
 <td>datetime of generation date (format example: 2019-03-27T13:15)</td>
 <td>Autogenerated</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>NbOfTxs</td>
+<td><code>NbOfTxs</code></td>
 <td>number of transactions (number of payments from XLS)</td>
 <td>Count number of payments list</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>CtrlSum</td>
+<td><code>CtrlSum</code></td>
 <td>control sum is amount of all payments (total)</td>
 <td>Count total amount of all payments</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>InitgPty</td>
-<td>it is initiator information block</td>
+<td><code>InitgPty</code></td>
+<td>it is initiator information block where need to use Debtor name</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>InitgPty &gt; Nm</td>
+<td><code>InitgPty &gt; Nm</code></td>
 <td>Initiator name, can be organisation or person</td>
 <td>example: [Name Surname / Company Name Ltd.]</td>
 <td>Initiator name</td>
 </tr>
 <tr>
-<td>CstmrCdtTrfInitn &gt; PmtInf</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf</code></td>
 <td></td>
 <td>Payment information</td>
 <td>this could be multiple (each block)</td>
@@ -412,52 +478,52 @@
 </tr>
 <tr>
 <td></td>
-<td>PmtInfId</td>
+<td><code>PmtInfId</code></td>
 <td>must be generated unique (from 7-35 symbols)</td>
 <td>Autogenerated</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>PmtMtd</td>
+<td><code>PmtMtd</code></td>
 <td>must be TRF</td>
 <td>TRF</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>NbOfTxs</td>
+<td><code>NbOfTxs</code></td>
 <td>must be 1</td>
 <td>1</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>CtrlSum</td>
+<td><code>CtrlSum</code></td>
 <td>there must be the amount of exact payment</td>
 <td>from input <code>Amount</code></td>
 <td>Amount</td>
 </tr>
 <tr>
 <td></td>
-<td>PmtTpInf &gt; SvcLvl &gt; Cd</td>
+<td><code>PmtTpInf &gt; SvcLvl &gt; Cd</code></td>
 <td>must be SEPA</td>
 <td>SEPA</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
-<td>ReqdExctnDt</td>
+<td><code>ReqdExctnDt</code></td>
 <td>date when to do payment</td>
 <td>from input <code>Initiation date</code></td>
 <td>Initiation date</td>
 </tr>
 <tr>
 <td></td>
-<td>Dbtr</td>
+<td><code>Dbtr</code></td>
 <td>Debtor name</td>
-<td>from input <code>Name (debtor)</code></td>
-<td>Name (debtor)</td>
+<td>from input <code>Name (payer)</code></td>
+<td>Name (payer)</td>
 </tr>
 </tbody></table>
 <h3 id='optional-parameters-2'>Optional Parameters</h3>
@@ -471,7 +537,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>CstmrCdtTrfInitn &gt; PmtInf</td>
+<td><code>CstmrCdtTrfInitn &gt; PmtInf</code></td>
 <td></td>
 <td>Payment information</td>
 <td>this could be multiple (each block)</td>
@@ -479,73 +545,73 @@
 </tr>
 <tr>
 <td></td>
-<td>Dbtr &gt; PstlAdr &gt; Ctry</td>
+<td><code>Dbtr &gt; PstlAdr &gt; Ctry</code></td>
 <td>Debtor country</td>
-<td>from input <code>Country (debtor)</code> it must go with Address (debtor)</td>
-<td>Country (debtor)</td>
+<td>from input <code>Country (payer)</code> it must go with Address (payer)</td>
+<td>Country (payer)</td>
 </tr>
 <tr>
 <td></td>
-<td>Dbtr &gt; PstlAdr &gt; AdrLine</td>
+<td><code>Dbtr &gt; PstlAdr &gt; AdrLine</code></td>
 <td>Debtor address line</td>
-<td>from input <code>Address (debtor)</code> it must go with Country (debtor)</td>
-<td>Address (debtor)</td>
+<td>from input <code>Address (payer)</code> it must go with Country (payer)</td>
+<td>Address (payer)</td>
 </tr>
 <tr>
 <td></td>
-<td>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</td>
+<td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</code></td>
 <td>Debtor code</td>
-<td>from input <code>Code (debtor)</code> it must go with Type (debtor) and Identification type (debtor)</td>
-<td>Code (debtor)</td>
+<td>from input <code>Code (payer)</code> it must go with Type (payer) and Identification type (payer)</td>
+<td>Code (payer)</td>
 </tr>
 <tr>
 <td></td>
-<td>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</td>
+<td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 <td>Debtor identification type</td>
-<td>from input <code>Identification type (debtor)</code> it must go with Type (debtor) and Code (debtor)</td>
-<td>Identification type (debtor)</td>
+<td>from input <code>Identification type (payer)</code> it must go with Type (payer) and Code (payer)</td>
+<td>Identification type (payer)</td>
 </tr>
 <tr>
 <td></td>
-<td>DbtrAgt &gt; FinInstnId &gt; BIC</td>
+<td><code>DbtrAgt &gt; FinInstnId &gt; BIC</code></td>
 <td>Debtor bank code</td>
-<td>from input <code>BIC (debtor)</code></td>
-<td>BIC (debtor)</td>
+<td>from input <code>BIC (payer)</code></td>
+<td>BIC (payer)</td>
 </tr>
 <tr>
 <td></td>
-<td>CdtTrfTxInf &gt; Cdtr &gt; PstlAdr &gt; Ctry</td>
-<td>Debtor country</td>
-<td>from input <code>Country (receiver)</code> it must go with Address (receiver)</td>
-<td>Country (receiver)</td>
+<td><code>CdtTrfTxInf &gt; Cdtr &gt; PstlAdr &gt; Ctry</code></td>
+<td>Beneficiary country</td>
+<td>from input <code>Country (beneficiary)</code> it must go with Address (beneficiary)</td>
+<td>Country (beneficiary)</td>
 </tr>
 <tr>
 <td></td>
-<td>CdtTrfTxInf &gt; Cdtr  &gt; PstlAdr &gt; AdrLine</td>
-<td>Debtor address line</td>
-<td>from input <code>Address (receiver)</code> it must go with Country (receiver)</td>
-<td>Address (receiver)</td>
+<td><code>CdtTrfTxInf &gt; Cdtr  &gt; PstlAdr &gt; AdrLine</code></td>
+<td>Beneficiary address line</td>
+<td>from input <code>Address (beneficiary)</code> it must go with Country (beneficiary)</td>
+<td>Address (beneficiary)</td>
 </tr>
 <tr>
 <td></td>
-<td>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</td>
-<td>Debtor code</td>
-<td>from input <code>Code (receiver)</code> it must go with Type (receiver) and Identification type (receiver)</td>
-<td>Code (receiver)</td>
+<td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</code></td>
+<td>Beneficiary code</td>
+<td>from input <code>Code (beneficiary)</code> it must go with Type (beneficiary) and Identification type (beneficiary)</td>
+<td>Code (beneficiary)</td>
 </tr>
 <tr>
 <td></td>
-<td>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</td>
-<td>Debtor identification type</td>
-<td>from input <code>Identification type (receiver)</code> it must go with Type (receiver) and Code (receiver)</td>
-<td>Identification type (receiver)</td>
+<td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
+<td>Beneficiary identification type</td>
+<td>from input <code>Identification type (beneficiary)</code> it must go with Type (beneficiary) and Code (beneficiary)</td>
+<td>Identification type (beneficiary)</td>
 </tr>
 <tr>
 <td></td>
-<td>CdtTrfTxInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</td>
-<td>Receiver bank code</td>
-<td>from input <code>BIC (receiver)</code></td>
-<td>BIC (receiver)</td>
+<td><code>CdtTrfTxInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</code></td>
+<td>Beneficiary bank code</td>
+<td>from input <code>BIC (beneficiary)</code></td>
+<td>BIC (beneficiary)</td>
 </tr>
 </tbody></table>
 <h2 id='naming-explanations'>Naming explanations</h2>
@@ -553,38 +619,38 @@
 <tr>
 <th>XLS</th>
 <th>XML</th>
-<th>Routing in XML</th>
+<th>Mapping in XML</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Company number</td>
-<td>Cd &gt; COID</td>
-<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; OrgId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+<td>COID</td>
+<td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; OrgId &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
 <td>Person code</td>
-<td>Cd &gt; NIDN</td>
-<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+<td>NIDN</td>
+<td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
 <td>Driving licence number</td>
-<td>Cd &gt; DRLC</td>
-<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+<td>DRLC</td>
+<td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
 <td>Passport number</td>
-<td>Cd &gt; CCPT</td>
-<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</td>
+<td>CCPT</td>
+<td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
-<td>Type (debtor)</td>
+<td>Type (payer)</td>
 <td>[PrvtId / OrgId]</td>
-<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</td>
+<td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</code></td>
 </tr>
 <tr>
-<td>Type (receiver)</td>
+<td>Type (beneficiary)</td>
 <td>[PrvtId / OrgId]</td>
-<td>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</td>
+<td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</code></td>
 </tr>
 </tbody></table>
 <h1 id='examples'>Examples</h1><h2 id='from-xls-to-xml'>From XLS to XML</h2>
