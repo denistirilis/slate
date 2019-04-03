@@ -244,7 +244,7 @@
         <ul class="toc-footer">
             <li><a href='mailto:support@ibsettle.com'>Contact support</a></li>
             <li>All rights reserved © 2019 IBS Lithuania</li>
-            <li>Version 1.0.4 (2019-04-02)</li>
+            <li>Version 1.0.5 (2019-04-03)</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -272,31 +272,31 @@
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; ReqdExctnDt</code></td>
 </tr>
 <tr>
-<td>Name (initiator)</td>
+<td>Initiator name - Debtor</td>
 <td>Debtor name here also</td>
 <td>[Name surname / Company Name Ltd.]</td>
 <td><code>CstmrCdtTrfInitn &gt; GrpHdr &gt; InitgPty &gt; Nm</code></td>
 </tr>
 <tr>
-<td>Name (payer)</td>
+<td>Payer Name</td>
 <td>Debtor name</td>
 <td>[Name surname / Company Name Ltd.]</td>
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; Dbtr &gt; Nm</code></td>
 </tr>
 <tr>
-<td>IBAN (payer)</td>
+<td>Payer IBAN</td>
 <td>Debtor IBAN number</td>
 <td>LT103910020000000062</td>
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAcct &gt; Id &gt; IBAN</code></td>
 </tr>
 <tr>
-<td>Name (beneficiary)</td>
+<td>Beneficiary Name</td>
 <td>Receiver name</td>
 <td>[Name surname / Company Name Ltd.]</td>
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; Cdtr &gt; Nm</code></td>
 </tr>
 <tr>
-<td>IBAN (beneficiary)</td>
+<td>Beneficiary IBAN</td>
 <td>Receiver IBAN number</td>
 <td>LT237300010111179102</td>
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAcct &gt; Id &gt; IBAN</code></td>
@@ -330,73 +330,73 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>BIC (payer)</td>
+<td>Payer BIC</td>
 <td>Bank code</td>
 <td>IBIULT21XXX</td>
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; DbtrAgt &gt; FinInstnId &gt; BIC</code></td>
 </tr>
 <tr>
-<td>BIC (beneficiary)</td>
+<td>Beneficiary BIC</td>
 <td>Bank code</td>
 <td>HABALT22XXX</td>
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</code></td>
 </tr>
 <tr>
-<td>Country (payer)</td>
+<td>Ultimate Debtor Country</td>
 <td>Country code (two letters)</td>
 <td>LT</td>
 <td><code>Dbtr &gt; PstlAdr &gt; Ctry</code></td>
 </tr>
 <tr>
-<td>Address (payer)</td>
+<td>Ultimate Debtor Address</td>
 <td>Address</td>
 <td>Address str. 123-321, Vilnius</td>
 <td><code>Dbtr &gt; PstlAdr &gt; AdrLine</code></td>
 </tr>
 <tr>
-<td>Type (payer)</td>
+<td>Ultimate Debtor Type</td>
 <td>Type of payer</td>
 <td>Personal / Organisation</td>
 <td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</code></td>
 </tr>
 <tr>
-<td>Identification type (payer)</td>
+<td>Ultimate Debtor ID Type</td>
 <td>Identification type</td>
 <td>Company code, Person code, Passport, Driving licence</td>
 <td><code>Dbtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
-<td>Code (payer)</td>
+<td>Ultimate Debtor Code</td>
 <td>Payer code</td>
 <td>123456456</td>
 <td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
-<td>Country (beneficiary)</td>
+<td>Ultimate Creditor Country</td>
 <td>Country code (two letters)</td>
 <td>LT</td>
 <td><code>CdtTrfTxInf &gt; Cdtr &gt; PstlAdr &gt; Ctry</code></td>
 </tr>
 <tr>
-<td>Address (beneficiary)</td>
+<td>Ultimate Creditor Address</td>
 <td>Address</td>
 <td>Address str. 123-321, Vilnius</td>
 <td><code>CdtTrfTxInf &gt; Cdtr  &gt; PstlAdr &gt; AdrLine</code></td>
 </tr>
 <tr>
-<td>Type (beneficiary)</td>
+<td>Ultimate Creditor Type</td>
 <td>Type of beneficiary</td>
 <td>Personal / Organisation</td>
 <td><code>CstmrCdtTrfInitn &gt; PmtInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</code></td>
 </tr>
 <tr>
-<td>Identification type (beneficiary)</td>
+<td>Ultimate Creditor ID Type</td>
 <td>Identification type</td>
 <td>Company code, Person code, Passport, Driving licence</td>
 <td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
-<td>Code (beneficiary)</td>
+<td>Ultimate Creditor Code</td>
 <td>Beneficiary code</td>
 <td>945651233</td>
 <td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
@@ -522,8 +522,8 @@
 <td></td>
 <td><code>Dbtr</code></td>
 <td>Debtor name</td>
-<td>from input <code>Name (payer)</code></td>
-<td>Name (payer)</td>
+<td>from input <code>Payer Name</code></td>
+<td>Payer Name</td>
 </tr>
 </tbody></table>
 <h3 id='optional-parameters-2'>Optional Parameters</h3>
@@ -547,71 +547,71 @@
 <td></td>
 <td><code>Dbtr &gt; PstlAdr &gt; Ctry</code></td>
 <td>Debtor country</td>
-<td>from input <code>Country (payer)</code> it must go with Address (payer)</td>
-<td>Country (payer)</td>
+<td>from input <code>Ultimate Debtor Country</code> it must go with Ultimate Debtor Address</td>
+<td>Ultimate Debtor Country</td>
 </tr>
 <tr>
 <td></td>
 <td><code>Dbtr &gt; PstlAdr &gt; AdrLine</code></td>
 <td>Debtor address line</td>
-<td>from input <code>Address (payer)</code> it must go with Country (payer)</td>
-<td>Address (payer)</td>
+<td>from input <code>Ultimate Debtor Address</code> it must go with Ultimate Debtor Country</td>
+<td>Ultimate Debtor Address</td>
 </tr>
 <tr>
 <td></td>
 <td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</code></td>
 <td>Debtor code</td>
-<td>from input <code>Code (payer)</code> it must go with Type (payer) and Identification type (payer)</td>
-<td>Code (payer)</td>
+<td>from input <code>Ultimate Debtor Code</code> it must go with Ultimate Debtor Type and Ultimate Debtor ID Type</td>
+<td>Ultimate Debtor Code</td>
 </tr>
 <tr>
 <td></td>
 <td><code>Dbtr &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 <td>Debtor identification type</td>
-<td>from input <code>Identification type (payer)</code> it must go with Type (payer) and Code (payer)</td>
-<td>Identification type (payer)</td>
+<td>from input <code>Ultimate Debtor ID Type</code> it must go with Ultimate Debtor Type and Ultimate Debtor Code</td>
+<td>Ultimate Debtor ID Type</td>
 </tr>
 <tr>
 <td></td>
 <td><code>DbtrAgt &gt; FinInstnId &gt; BIC</code></td>
 <td>Debtor bank code</td>
-<td>from input <code>BIC (payer)</code></td>
-<td>BIC (payer)</td>
+<td>from input <code>Payer BIC</code></td>
+<td>Payer BIC</td>
 </tr>
 <tr>
 <td></td>
 <td><code>CdtTrfTxInf &gt; Cdtr &gt; PstlAdr &gt; Ctry</code></td>
 <td>Beneficiary country</td>
-<td>from input <code>Country (beneficiary)</code> it must go with Address (beneficiary)</td>
-<td>Country (beneficiary)</td>
+<td>from input <code>Ultimate Creditor Country</code> it must go with Ultimate Creditor Address</td>
+<td>Ultimate Creditor Country</td>
 </tr>
 <tr>
 <td></td>
 <td><code>CdtTrfTxInf &gt; Cdtr  &gt; PstlAdr &gt; AdrLine</code></td>
 <td>Beneficiary address line</td>
-<td>from input <code>Address (beneficiary)</code> it must go with Country (beneficiary)</td>
-<td>Address (beneficiary)</td>
+<td>from input <code>Ultimate Creditor Address</code> it must go with Ultimate Creditor Country</td>
+<td>Ultimate Creditor Address</td>
 </tr>
 <tr>
 <td></td>
 <td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; Id</code></td>
 <td>Beneficiary code</td>
-<td>from input <code>Code (beneficiary)</code> it must go with Type (beneficiary) and Identification type (beneficiary)</td>
-<td>Code (beneficiary)</td>
+<td>from input <code>Ultimate Creditor Code</code> it must go with Ultimate Creditor Type and Ultimate Creditor ID Type</td>
+<td>Ultimate Creditor Code</td>
 </tr>
 <tr>
 <td></td>
 <td><code>CdtTrfTxInf &gt; Cdtr  &gt; Id &gt; [PrvtId / OrgId] &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 <td>Beneficiary identification type</td>
-<td>from input <code>Identification type (beneficiary)</code> it must go with Type (beneficiary) and Code (beneficiary)</td>
-<td>Identification type (beneficiary)</td>
+<td>from input <code>Ultimate Creditor ID Type</code> it must go with Ultimate Creditor Type and Ultimate Creditor Code</td>
+<td>Ultimate Creditor ID Type</td>
 </tr>
 <tr>
 <td></td>
 <td><code>CdtTrfTxInf &gt; CdtrAgt &gt; FinInstnId &gt; BIC</code></td>
 <td>Beneficiary bank code</td>
-<td>from input <code>BIC (beneficiary)</code></td>
-<td>BIC (beneficiary)</td>
+<td>from input <code>Beneficiary BIC</code></td>
+<td>Beneficiary BIC</td>
 </tr>
 </tbody></table>
 <h2 id='naming-explanations'>Naming explanations</h2>
@@ -643,12 +643,12 @@
 <td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; PrvtId &gt; Othr &gt; SchemeNm &gt; Cd</code></td>
 </tr>
 <tr>
-<td>Type (payer)</td>
+<td>Ultimate Debtor Type</td>
 <td>[PrvtId / OrgId]</td>
 <td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</code></td>
 </tr>
 <tr>
-<td>Type (beneficiary)</td>
+<td>Ultimate Creditor Type</td>
 <td>[PrvtId / OrgId]</td>
 <td><code>[Dbtr / CdtTrfTxInf &gt; Cdtr] &gt; Id &gt; [PrvtId / OrgId]</code></td>
 </tr>
